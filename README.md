@@ -1,4 +1,4 @@
-# Graph Algorithm Visualizer - Production Ready
+# Graph Algorithm Visualizer
 
 [![Status](https://img.shields.io/badge/status-production-brightgreen)](https://github.com/UNC-GDSC/Graph-Algorithms-Visualizer)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
