@@ -1,0 +1,33 @@
+{
+  "name": "graph-algorithms-visualizer",
+  "version": "1.0.0",
+  "description": "Interactive visualization of graph algorithms (BFS, DFS, Dijkstra, A*) using HTML5 Canvas",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx http-server -p 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UNC-GDSC/Graph-Algorithms-Visualizer.git"
+  },
+  "keywords": [
+    "graph",
+    "algorithms",
+    "visualization",
+    "bfs",
+    "dfs",
+    "dijkstra",
+    "a-star",
+    "pathfinding",
+    "canvas",
+    "education",
+    "interactive"
+  ],
+  "author": "UNC-GDSC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UNC-GDSC/Graph-Algorithms-Visualizer/issues"
+  },
+  "homepage": "https://github.com/UNC-GDSC/Graph-Algorithms-Visualizer#readme"
+}

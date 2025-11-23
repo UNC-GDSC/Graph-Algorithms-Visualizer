@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Algorithm Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Graph Algorithm Visualizer</h1>
+            <p class="subtitle">Visualize BFS, DFS, Dijkstra's, and A* algorithms in real-time</p>
+        </header>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <label for="algorithm">Algorithm:</label>
+                <select id="algorithm">
+                    <option value="bfs">Breadth-First Search (BFS)</option>
+                    <option value="dfs">Depth-First Search (DFS)</option>
+                    <option value="dijkstra">Dijkstra's Algorithm</option>
+                    <option value="astar">A* Algorithm</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="preset">Graph Preset:</label>
+                <select id="preset">
+                    <option value="grid">Grid (10x10)</option>
+                    <option value="random">Random Graph</option>
+                    <option value="weighted">Weighted Graph</option>
+                    <option value="maze">Maze-like</option>
+                    <option value="custom">Custom (Click to Create)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="speed">Speed:</label>
+                <input type="range" id="speed" min="1" max="100" value="50">
+                <span id="speed-value">50</span>
+            </div>
+
+            <div class="button-group">
+                <button id="start-btn" class="btn btn-primary">Start Visualization</button>
+                <button id="pause-btn" class="btn btn-secondary" disabled>Pause</button>
+                <button id="reset-btn" class="btn btn-secondary">Reset</button>
+                <button id="step-btn" class="btn btn-secondary">Step</button>
+                <button id="clear-btn" class="btn btn-danger">Clear Graph</button>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Nodes Visited:</span>
+                    <span id="nodes-visited" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Path Length:</span>
+                    <span id="path-length" class="stat-value">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Status:</span>
+                    <span id="status" class="stat-value">Ready</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="graph-canvas"></canvas>
+        </div>
+
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #4CAF50;"></span>
+                    <span>Start Node</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #F44336;"></span>
+                    <span>End Node</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #2196F3;"></span>
+                    <span>Visiting</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #90CAF9;"></span>
+                    <span>Visited</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #FFD700;"></span>
+                    <span>Path</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #424242;"></span>
+                    <span>Wall/Obstacle</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>Instructions</h3>
+            <ul>
+                <li><strong>Select an Algorithm:</strong> Choose from BFS, DFS, Dijkstra's, or A*</li>
+                <li><strong>Choose a Preset:</strong> Start with a grid, random graph, or create your own</li>
+                <li><strong>Custom Mode:</strong> Click to add nodes, right-click to set start/end, ctrl+click to add walls</li>
+                <li><strong>Adjust Speed:</strong> Control visualization speed with the slider</li>
+                <li><strong>Start:</strong> Begin the visualization to see the algorithm in action</li>
+                <li><strong>Step Mode:</strong> Use the Step button to advance one iteration at a time</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="graph.js"></script>
+    <script src="algorithms.js"></script>
+    <script src="visualizer.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
