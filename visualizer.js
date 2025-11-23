@@ -10,6 +10,11 @@ class Visualizer {
         this.graph = null;
         this.animationPath = [];
 
+        // Transform state
+        this.scale = 1;
+        this.translateX = 0;
+        this.translateY = 0;
+
         // Colors
         this.colors = {
             normal: '#E0E0E0',
@@ -30,6 +35,12 @@ class Visualizer {
         this.fontSize = 12;
 
         this.setupCanvas();
+    }
+
+    setTransform(scale, translateX, translateY) {
+        this.scale = scale;
+        this.translateX = translateX;
+        this.translateY = translateY;
     }
 
     setupCanvas() {
@@ -60,6 +71,13 @@ class Visualizer {
         // Clear canvas
         this.ctx.clearRect(0, 0, this.width, this.height);
 
+        // Save context
+        this.ctx.save();
+
+        // Apply transformations
+        this.ctx.translate(this.translateX, this.translateY);
+        this.ctx.scale(this.scale, this.scale);
+
         // Draw edges first
         this.drawEdges();
 
@@ -70,6 +88,9 @@ class Visualizer {
         if (this.animationPath.length > 0) {
             this.drawPath(this.animationPath);
         }
+
+        // Restore context
+        this.ctx.restore();
     }
 
     drawEdges() {

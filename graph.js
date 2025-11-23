@@ -283,4 +283,21 @@ class GraphGenerator {
 
         return graph;
     }
+
+    // Additional presets from templates
+    static createSimplePath(width, height, offsetX, offsetY) {
+        return GraphTemplates.getTemplate('simple-path').generator(width, height, offsetX, offsetY);
+    }
+
+    static createBinaryTree(width, height, offsetX, offsetY) {
+        return GraphTemplates.getTemplate('binary-tree').generator(width, height, offsetX, offsetY);
+    }
+
+    static createDiamond(width, height, offsetX, offsetY) {
+        return GraphTemplates.getTemplate('diamond').generator(width, height, offsetX, offsetY);
+    }
+
+    static createStar(width, height, offsetX, offsetY) {
+        return GraphTemplates.getTemplate('star').generator(width, height, offsetX, offsetY);
+    }
 }

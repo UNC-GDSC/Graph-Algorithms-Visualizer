@@ -2,55 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graph Algorithm Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Interactive visualization of graph algorithms including BFS, DFS, Dijkstra, A*, Bidirectional BFS, Bellman-Ford, and Greedy Best-First Search">
+    <meta name="keywords" content="graph algorithms, visualization, pathfinding, BFS, DFS, Dijkstra, A*, education">
+    <meta name="author" content="UNC-GDSC">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="GraphViz">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Graph Algorithm Visualizer">
+    <meta property="og:description" content="Interactive visualization of graph traversal and pathfinding algorithms">
+    <meta property="og:type" content="website">
+
+    <title>Graph Algorithm Visualizer - Interactive Learning Tool</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Graph Algorithm Visualizer</h1>
-            <p class="subtitle">Visualize BFS, DFS, Dijkstra's, and A* algorithms in real-time</p>
+            <div class="header-content">
+                <div>
+                    <h1>Graph Algorithm Visualizer</h1>
+                    <p class="subtitle">Visualize 7 graph algorithms in real-time with interactive controls</p>
+                </div>
+                <div class="header-actions">
+                    <button id="theme-btn" class="icon-btn" title="Toggle Theme" aria-label="Toggle theme">🌓</button>
+                    <button id="tutorial-btn" class="icon-btn" title="Start Tutorial" aria-label="Start tutorial">❓</button>
+                    <button id="share-btn" class="icon-btn" title="Share Graph" aria-label="Share graph">🔗</button>
+                    <button id="fullscreen-btn" class="icon-btn" title="Toggle Fullscreen" aria-label="Toggle fullscreen">⛶</button>
+                </div>
+            </div>
         </header>
 
-        <div class="controls-panel">
-            <div class="control-group">
-                <label for="algorithm">Algorithm:</label>
-                <select id="algorithm">
-                    <option value="bfs">Breadth-First Search (BFS)</option>
-                    <option value="dfs">Depth-First Search (DFS)</option>
-                    <option value="dijkstra">Dijkstra's Algorithm</option>
-                    <option value="astar">A* Algorithm</option>
-                </select>
-            </div>
+        <div class="controls-panel" role="region" aria-label="Algorithm controls">
+            <div class="control-row">
+                <div class="control-group">
+                    <label for="algorithm">Algorithm:</label>
+                    <select id="algorithm" aria-label="Select algorithm">
+                        <option value="bfs">Breadth-First Search (BFS)</option>
+                        <option value="dfs">Depth-First Search (DFS)</option>
+                        <option value="dijkstra">Dijkstra's Algorithm</option>
+                        <option value="astar" selected>A* Algorithm</option>
+                        <option value="bidirectional">Bidirectional BFS</option>
+                        <option value="bellman-ford">Bellman-Ford</option>
+                        <option value="greedy">Greedy Best-First</option>
+                    </select>
+                    <small id="algo-description" class="description"></small>
+                </div>
 
-            <div class="control-group">
-                <label for="preset">Graph Preset:</label>
-                <select id="preset">
-                    <option value="grid">Grid (10x10)</option>
-                    <option value="random">Random Graph</option>
-                    <option value="weighted">Weighted Graph</option>
-                    <option value="maze">Maze-like</option>
-                    <option value="custom">Custom (Click to Create)</option>
-                </select>
-            </div>
+                <div class="control-group">
+                    <label for="preset">Graph Preset:</label>
+                    <select id="preset" aria-label="Select graph preset">
+                        <option value="grid">Grid (10x10)</option>
+                        <option value="random">Random Graph</option>
+                        <option value="weighted">Weighted Graph</option>
+                        <option value="maze">Maze-like</option>
+                        <option value="simple-path">Simple Path</option>
+                        <option value="binary-tree">Binary Tree</option>
+                        <option value="diamond">Diamond Pattern</option>
+                        <option value="star">Star Pattern</option>
+                        <option value="custom">Custom (Click to Create)</option>
+                    </select>
+                </div>
 
-            <div class="control-group">
-                <label for="speed">Speed:</label>
-                <input type="range" id="speed" min="1" max="100" value="50">
-                <span id="speed-value">50</span>
+                <div class="control-group">
+                    <label for="speed">Speed:</label>
+                    <input type="range" id="speed" min="1" max="100" value="50" aria-label="Visualization speed">
+                    <span id="speed-value">50</span>
+                </div>
             </div>
 
             <div class="button-group">
-                <button id="start-btn" class="btn btn-primary">Start Visualization</button>
-                <button id="pause-btn" class="btn btn-secondary" disabled>Pause</button>
-                <button id="reset-btn" class="btn btn-secondary">Reset</button>
-                <button id="step-btn" class="btn btn-secondary">Step</button>
-                <button id="clear-btn" class="btn btn-danger">Clear Graph</button>
+                <button id="start-btn" class="btn btn-primary" aria-label="Start visualization">
+                    <span>▶</span> Start
+                </button>
+                <button id="pause-btn" class="btn btn-secondary" disabled aria-label="Pause visualization">
+                    <span>⏸</span> Pause
+                </button>
+                <button id="reset-btn" class="btn btn-secondary" aria-label="Reset visualization">
+                    <span>↻</span> Reset
+                </button>
+                <button id="step-btn" class="btn btn-secondary" aria-label="Step through algorithm">
+                    <span>⏭</span> Step
+                </button>
+                <button id="compare-btn" class="btn btn-secondary" aria-label="Compare algorithms">
+                    <span>⚖</span> Compare
+                </button>
+            </div>
+
+            <div class="button-group secondary-actions">
+                <button id="undo-btn" class="btn btn-sm" disabled aria-label="Undo">↶ Undo</button>
+                <button id="redo-btn" class="btn btn-sm" disabled aria-label="Redo">↷ Redo</button>
+                <button id="clear-btn" class="btn btn-sm btn-danger" aria-label="Clear graph">✕ Clear</button>
+                <button id="export-btn" class="btn btn-sm" aria-label="Export graph">💾 Export</button>
+                <button id="import-btn" class="btn btn-sm" aria-label="Import graph">📁 Import</button>
+                <input type="file" id="import-file" accept=".json" style="display: none;" aria-label="Import file input">
             </div>
         </div>
 
-        <div class="info-panel">
+        <div class="info-panel" role="region" aria-label="Statistics">
             <div class="stats">
                 <div class="stat-item">
                     <span class="stat-label">Nodes Visited:</span>
@@ -61,17 +116,32 @@
                     <span id="path-length" class="stat-value">-</span>
                 </div>
                 <div class="stat-item">
+                    <span class="stat-label">Total Distance:</span>
+                    <span id="total-distance" class="stat-value">-</span>
+                </div>
+                <div class="stat-item">
                     <span class="stat-label">Status:</span>
                     <span id="status" class="stat-value">Ready</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Complexity:</span>
+                    <span id="complexity" class="stat-value">-</span>
                 </div>
             </div>
         </div>
 
-        <div class="canvas-container">
-            <canvas id="graph-canvas"></canvas>
+        <div class="canvas-container" role="main">
+            <div class="canvas-controls">
+                <button id="zoom-in-btn" class="canvas-btn" title="Zoom In" aria-label="Zoom in">+</button>
+                <button id="zoom-out-btn" class="canvas-btn" title="Zoom Out" aria-label="Zoom out">−</button>
+                <button id="zoom-reset-btn" class="canvas-btn" title="Reset Zoom" aria-label="Reset zoom">⊙</button>
+                <button id="download-btn" class="canvas-btn" title="Download as Image" aria-label="Download as image">📷</button>
+            </div>
+            <canvas id="graph-canvas" role="img" aria-label="Graph visualization canvas"></canvas>
+            <div id="minimap" class="minimap"></div>
         </div>
 
-        <div class="legend">
+        <div class="legend" role="region" aria-label="Color legend">
             <h3>Legend</h3>
             <div class="legend-items">
                 <div class="legend-item">
@@ -101,22 +171,109 @@
             </div>
         </div>
 
-        <div class="instructions">
-            <h3>Instructions</h3>
-            <ul>
-                <li><strong>Select an Algorithm:</strong> Choose from BFS, DFS, Dijkstra's, or A*</li>
-                <li><strong>Choose a Preset:</strong> Start with a grid, random graph, or create your own</li>
-                <li><strong>Custom Mode:</strong> Click to add nodes, right-click to set start/end, ctrl+click to add walls</li>
-                <li><strong>Adjust Speed:</strong> Control visualization speed with the slider</li>
-                <li><strong>Start:</strong> Begin the visualization to see the algorithm in action</li>
-                <li><strong>Step Mode:</strong> Use the Step button to advance one iteration at a time</li>
-            </ul>
+        <div class="instructions collapsed" id="instructions-panel">
+            <h3>
+                Instructions
+                <button id="toggle-instructions" class="toggle-btn" aria-label="Toggle instructions">▼</button>
+            </h3>
+            <div class="instructions-content">
+                <div class="instruction-section">
+                    <h4>🎯 Getting Started</h4>
+                    <ul>
+                        <li><strong>Select Algorithm:</strong> Choose from 7 different algorithms</li>
+                        <li><strong>Choose Preset:</strong> Start with a pre-built graph or create custom</li>
+                        <li><strong>Adjust Speed:</strong> Control visualization speed (1-100)</li>
+                        <li><strong>Start:</strong> Click Start or press <kbd>Space</kbd></li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h4>🖱️ Mouse Controls</h4>
+                    <ul>
+                        <li><strong>Left Click:</strong> Create nodes (custom mode)</li>
+                        <li><strong>Right Click:</strong> Set start node</li>
+                        <li><strong>Shift + Right Click:</strong> Set end node</li>
+                        <li><strong>Ctrl/Cmd + Click:</strong> Toggle walls</li>
+                        <li><strong>Mouse Wheel:</strong> Zoom in/out</li>
+                        <li><strong>Alt + Drag:</strong> Pan canvas</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h4>⌨️ Keyboard Shortcuts</h4>
+                    <ul>
+                        <li><kbd>Space</kbd> - Start/Pause</li>
+                        <li><kbd>R</kbd> - Reset</li>
+                        <li><kbd>S</kbd> - Step</li>
+                        <li><kbd>Ctrl/Cmd + Z</kbd> - Undo</li>
+                        <li><kbd>Ctrl/Cmd + Y</kbd> - Redo</li>
+                        <li><kbd>Ctrl/Cmd + S</kbd> - Export</li>
+                        <li><kbd>F</kbd> - Toggle Fullscreen</li>
+                        <li><kbd>T</kbd> - Toggle Theme</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h4>📱 Touch Gestures</h4>
+                    <ul>
+                        <li><strong>Pinch:</strong> Zoom in/out</li>
+                        <li><strong>Two Finger Drag:</strong> Pan canvas</li>
+                        <li><strong>Tap:</strong> Select/Create nodes</li>
+                        <li><strong>Long Press:</strong> Set start/end nodes</li>
+                    </ul>
+                </div>
+            </div>
         </div>
+
+        <footer class="footer">
+            <p>
+                Built with ❤️ by <a href="https://github.com/UNC-GDSC" target="_blank">UNC-GDSC</a> |
+                <a href="https://github.com/UNC-GDSC/Graph-Algorithms-Visualizer" target="_blank">View on GitHub</a> |
+                <a href="#" id="privacy-link">Privacy</a>
+            </p>
+            <p class="version">v1.0.0 | <span id="install-prompt" style="display: none;">
+                <a href="#" id="install-pwa">📱 Install App</a>
+            </span></p>
+        </footer>
     </div>
 
+    <!-- Scripts -->
+    <script src="utils.js"></script>
     <script src="graph.js"></script>
     <script src="algorithms.js"></script>
     <script src="visualizer.js"></script>
+    <script src="import-export.js"></script>
+    <script src="controls.js"></script>
     <script src="main.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('install-prompt').style.display = 'inline';
+        });
+
+        document.getElementById('install-pwa')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User ${outcome} the install prompt`);
+                deferredPrompt = null;
+                document.getElementById('install-prompt').style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
